@@ -26,7 +26,7 @@ fetchReplacement = (url) ->
     if doc = processResponse()
       reflectNewUrl url
       changePage extractTitleAndBody(doc)...
-      reflectRedirectedUrl()
+      reflectRedirectedUrl(xhr)
       if document.location.hash
         document.location.href = document.location.href
       else
@@ -98,7 +98,7 @@ reflectNewUrl = (url) ->
   if url isnt referer
     window.history.pushState { turbolinks: true, position: currentState.position + 1 }, '', url
 
-reflectRedirectedUrl = ->
+reflectRedirectedUrl = (xhr) ->
   if location = xhr.getResponseHeader 'X-XHR-Redirected-To'
     preservedHash = if removeHash(location) is location then document.location.hash else ''
     window.history.replaceState currentState, '', location + preservedHash
@@ -307,4 +307,11 @@ else
 #   Turbolinks.visit(url)
 #   Turbolinks.pagesCached()
 #   Turbolinks.pagesCached(20)
-@Turbolinks = { visit, pagesCached, browserCompatibleDocumentParser, triggerEvent, changePage, extractTitleAndBody, reflectRedirectedUrl, resetScrollPosition }
+#   browserCompatibleDocumentParser()
+#   triggerEvent(name, data)
+#   changePage(title, body, csrfToken, runScripts)
+#   extractTitleAndBody(doc)
+#   reflectRedirectedUrl(xhr)
+#   reflectNewUrl(url)
+#   resetScrollPosition()
+@Turbolinks = { visit, pagesCached, browserCompatibleDocumentParser, triggerEvent, changePage, extractTitleAndBody, reflectRedirectedUrl, reflectNewUrl, resetScrollPosition }
