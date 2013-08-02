@@ -307,4 +307,4 @@ else
 #   Turbolinks.visit(url)
 #   Turbolinks.pagesCached()
 #   Turbolinks.pagesCached(20)
-@Turbolinks = { visit, pagesCached }
+@Turbolinks = { visit, pagesCached, browserCompatibleDocumentParser, triggerEvent, changePage, extractTitleAndBody, reflectRedirectedUrl, resetScrollPosition }
